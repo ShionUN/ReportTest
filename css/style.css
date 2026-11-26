@@ -1,0 +1,373 @@
+﻿/* ========================================
+   1. 基本設定
+======================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+form {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: #f7f6f3;
+    color: #303b43;
+    font-family: sans-serif;
+    font-size: 17px;
+}
+
+/* ========================================
+   2. ページレイアウト
+======================================== */
+
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.header {
+    flex-shrink: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #d8dcd9;
+}
+
+.header-inner {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 6px 24px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+    color: #303b43;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 12px 16px;
+}
+
+/* ========================================
+   3. 操作バー
+======================================== */
+
+.action-bar {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #ffffff;
+    border: 1px solid #e9ebe8;
+    border-radius: 4px;
+}
+
+    .action-bar > *:not(:last-child) {
+        margin-right: 16px;
+    }
+
+.selection-summary {
+    flex: 1;
+    min-width: 0;
+    color: #303b43;
+    font-size: 15px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+
+/* ========================================
+   4. ボタン共通
+======================================== */
+
+.download-button,
+.stored-button {
+    display: inline-block;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 9px 20px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+/* ダウンロードボタン */
+
+.download-button {
+    background: #426b87;
+    border: 1px solid #426b87;
+    color: #ffffff;
+}
+
+    .download-button:hover:not(:disabled) {
+        background: #345773;
+        border-color: #345773;
+    }
+
+    .download-button:disabled {
+        background: #ecedeb;
+        border-color: #d5d9d7;
+        color: #929ba5;
+        cursor: not-allowed;
+    }
+
+    .download-button.downloading {
+        opacity: 0.7;
+        cursor: wait;
+    }
+
+/* ストアド実行ボタン */
+
+.stored-button {
+    background: #ffffff;
+    border: 1px solid #91a3b5;
+    color: #303b43;
+}
+
+    .stored-button:hover:not(:disabled) {
+        background: #f7f8f7;
+        border-color: #426b87;
+    }
+
+    .stored-button:disabled {
+        background: #f0f2f4;
+        border-color: #d8dcd9;
+        color: #687786;
+        cursor: default;
+    }
+
+/* ========================================
+   5. メッセージ
+======================================== */
+
+.message {
+    display: block;
+    flex-shrink: 0;
+    min-height: 24px;
+    margin: 0 0 12px;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+    .message.error,
+    .error {
+        color: #b42318;
+        font-weight: bold;
+    }
+
+    .message.success,
+    .success {
+        color: #246344;
+    }
+
+/* ========================================
+   6. 帳票一覧領域
+======================================== */
+
+.report-list {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    background: #ffffff;
+    border: 1px solid #d8dcd9;
+}
+
+/* ========================================
+   7. 帳票テーブル
+======================================== */
+
+.report-grid {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    font-size: 16px;
+}
+
+    .report-grid th,
+    .report-grid td {
+        padding: 8px 12px;
+        border: none;
+        border-bottom: 1px solid #e9ebe8;
+        vertical-align: middle;
+    }
+
+    /* ヘッダー */
+
+    .report-grid th {
+        position: sticky;
+        top: -1px;
+        z-index: 2;
+        background: #ecefeb;
+        color: #303b43;
+        text-align: left;
+        white-space: nowrap;
+        /* ヘッダーの縦区切りを内側に描画 */
+        box-shadow: inset 0 -2px 0 #aebdcb
+    }
+
+    /* 行 */
+
+    .report-grid tr {
+        background: #ffffff;
+    }
+
+        .report-grid tr:nth-child(odd):not(:first-child) {
+            background: #fdfdfe;
+        }
+
+        .report-grid tr:hover:not(:first-child) {
+            background: #f7f8f7;
+        }
+
+        /* 選択行 */
+
+        .report-grid tr.selected-row {
+            background: #edf2f3;
+        }
+
+            .report-grid tr.selected-row:hover {
+                background: #e7eff1;
+            }
+
+    /* No・チェック列 */
+
+    .report-grid td:first-child,
+    .report-grid td:nth-child(2),
+    .report-grid th:first-child,
+    .report-grid th:nth-child(2) {
+        text-align: center;
+    }
+
+    .report-grid th:first-child,
+    .report-grid td:first-child {
+        width: 56px;
+    }
+
+    .report-grid th:nth-child(2),
+    .report-grid td:nth-child(2) {
+        width: 58px;
+    }
+
+    /* タイトル */
+
+    .report-grid td:nth-child(3) {
+        min-width: 180px;
+        font-weight: bold;
+    }
+
+    /* 作成データ */
+
+    .report-grid td:nth-child(5) {
+        color: #53636a;
+        overflow-wrap: anywhere;
+    }
+
+.output-filename {
+    font-size: 16px;
+}
+
+/* ========================================
+   8. チェックボックス
+======================================== */
+
+.report-grid input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    accent-color: #426b87;
+}
+
+/* ========================================
+   9. 抽出条件
+======================================== */
+
+.condition-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.condition-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+    .condition-item:last-child {
+        margin-bottom: 0;
+    }
+
+.condition-label {
+    margin-bottom: 2px;
+    color: #53636a;
+    font-size: 15px;
+}
+
+.required {
+    color: #a12626;
+}
+
+/* ========================================
+   10. 入力欄
+======================================== */
+
+.report-grid select,
+.report-grid input[type="text"],
+.report-grid input[type="tel"] {
+    width: 140px;
+    height: 34px;
+    max-width: 100%;
+    padding: 0px 0px 0px 8px;
+    background: #ffffff;
+    color: #303b43;
+    border: 1px solid #94a5b5;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+    .report-grid select:hover,
+    .report-grid input[type="text"]:hover,
+    .report-grid input[type="tel"]:hover {
+        border-color: #426b87;
+    }
+
+    .report-grid select:disabled,
+    .report-grid input[type="text"]:disabled,
+    .report-grid input[type="tel"]:disabled {
+        background: #eef1f4;
+        color: #657482;
+        cursor: default;
+    }
+
+    /* ========================================
+   11. フォーカス表示
+======================================== */
+
+    .download-button:focus,
+    .stored-button:focus,
+    .report-grid select:focus,
+    .report-grid input[type="text"]:focus,
+    .report-grid input[type="tel"]:focus,
+    .report-grid input[type="checkbox"]:focus {
+        outline: 2px solid #7b9aaf;
+        outline-offset: 2px;
+    }
